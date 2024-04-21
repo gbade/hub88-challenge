@@ -1,4 +1,4 @@
-defmodule Challenge.User do
+defmodule Challenge.Server do
   use GenServer
 
   # Define the structure for user data
@@ -18,7 +18,7 @@ defmodule Challenge.User do
   def handle_cast({:create_users, users}, _from, state) do
     new_state = Enum.reduce(users, state, fn user, acc ->
       if user != "" and not Map.has_key?(acc, user) do
-        Map.put(acc, user, %Challenge.User{currency: "USD", amount: 100_000})
+        Map.put(acc, user, %Challenge.Server{currency: "USD", amount: 100_000})
       else
         Map.put(acc, user, %{"currency" => "USD", "amount" => 100_000})
       end

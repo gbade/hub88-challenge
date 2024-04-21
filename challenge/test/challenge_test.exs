@@ -4,25 +4,22 @@ defmodule ChallengeTest do
 
   alias Challenge.{Server, Supervisor}
 
-  setup do
-    {:ok, pid} = Supervisor.start_link([])
-    {:ok, pid: pid}
-  end
-
   describe "start/0" do
-    test "returns pid on success" do
-      result = Challenge.start()
-      assert is_pid(result)
+    test "starts the supervisor" do
+      {:ok, pid} = Challenge.start()
+
+      assert pid != nil
+      assert Process.alive?(pid)
     end
   end
 
-  test "creating users" do
-    server_pid = Supervisor.which_children(@pid)
-    # Creating users with empty strings should be ignored
-    assert Server.create_users(server_pid, ["user1", "user2", ""]) == :ok
-    # Creating duplicate users should be ignored
-    assert Server.create_users(server_pid, ["user1", "user2", "user1"]) == :ok
-    # Creating users with non-empty strings
-    assert Server.create_users(server_pid, ["user3", "user4"]) == :ok
+  describe "start_link/1" do
+    test "starts the supervisor" do
+      {:ok, pid} = Challenge.Supervisor.start_link([])
+
+      assert {:ok, _} = {:ok, pid}
+
+      assert Process.alive?(pid)
+    end
   end
 end

@@ -7,7 +7,7 @@ defmodule Challenge do
   """
   @spec start :: GenServer.server()
   def start do
-    {:ok, supervisor_pid} = Supervisor.start_link([])
+    {:ok, supervisor_pid} = Challenge.Supervisor.start_link([])
     supervisor_pid
   end
 

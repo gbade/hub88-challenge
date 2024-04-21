@@ -7,7 +7,7 @@ defmodule Challenge.Supervisor do
 
   def init(:ok) do
     children = [
-      {Challenge.User, []}
+      {Challenge.Server, []}
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
