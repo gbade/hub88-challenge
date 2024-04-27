@@ -17,7 +17,7 @@ defmodule Challenge do
   """
   @spec create_users(server :: GenServer.server(), users :: [String.t()]) :: :ok
   def create_users(server, users) do
-   GenServer.cast(server,{:create_users, users})
+   GenServer.cast(server, {:create_users, users})
    :ok
   end
 
